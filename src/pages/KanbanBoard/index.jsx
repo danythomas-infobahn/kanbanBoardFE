@@ -13,11 +13,13 @@ const ZOOM_STEP = 0.1;
 export default function KanbanBoard() {
   const [data, setData] = useState(initialData);
   const [selectedCard, setSelectedCard] = useState(null);
-  const [zoom, setZoom] = useState(1);
+  // Initial zoom set to 0.7 to ensure at least 3 column titles are visible
+  const [zoom, setZoom] = useState(0.7);
 
   const zoomIn = useCallback(() => setZoom(z => Math.min(z + ZOOM_STEP, MAX_ZOOM)), []);
   const zoomOut = useCallback(() => setZoom(z => Math.max(z - ZOOM_STEP, MIN_ZOOM)), []);
-  const resetZoom = useCallback(() => setZoom(1), []);
+  // Reset to initial zoom (0.7) to show 3 columns
+  const resetZoom = useCallback(() => setZoom(0.7), []);
 
   const handleSelectCard = useCallback(card => setSelectedCard(card), []);
   const handleCloseCard = useCallback(() => setSelectedCard(null), []);
