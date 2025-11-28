@@ -13,17 +13,37 @@ function CardItem({ card, index, setSelectedCard }) {
 
   return (
     <Draggable draggableId={card.id} index={index}>
-      {(provided, snapshot) => (
-        <div
-          className={`kanban-card ${snapshot.isDragging ? "dragging" : ""} ${card.priority ? "priority-blink" : ""}`}
-          ref={provided.innerRef}
-          {...provided.draggableProps}
-          {...provided.dragHandleProps}
-          style={{
-            ...provided.draggableProps.style,
-            "--card-color": cardColor,
-          }}
-        >
+      {(provided, snapshot) => {
+        // Extract transform from provided style and remove any scale, keep only translate
+        const providedTransform = provided.draggableProps.style?.transform || '';
+        const transformWithoutScale = providedTransform.replace(/scale\([^)]+\)/g, '').trim();
+        const finalTransform = snapshot.isDragging 
+          ? (transformWithoutScale ? `${transformWithoutScale} rotate(2deg)` : 'rotate(2deg)')
+          : providedTransform;
+
+        return (
+          <div
+            className={`kanban-card ${snapshot.isDragging ? "dragging" : ""} ${card.priority ? "priority-blink" : ""}`}
+            ref={provided.innerRef}
+            {...provided.draggableProps}
+            {...provided.dragHandleProps}
+            style={{
+              ...provided.draggableProps.style,
+              "--card-color": cardColor,
+              // Preserve exact dimensions during drag to prevent any size changes
+              ...(snapshot.isDragging && {
+                width: "254px",
+                minWidth: "254px",
+                maxWidth: "254px",
+                boxSizing: "border-box",
+                padding: "14px",
+                flexShrink: 0,
+                flexGrow: 0,
+              }),
+              // Always apply the correct transform (after other styles to ensure override)
+              ...(snapshot.isDragging && { transform: finalTransform }),
+            }}
+          >
           {/* Header */}
           <div className="card-header">
             <div
@@ -145,7 +165,8 @@ function CardItem({ card, index, setSelectedCard }) {
             </div>
           )}
         </div>
-      )}
+        );
+      }}
     </Draggable>
   );
 }

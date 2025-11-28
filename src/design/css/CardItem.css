@@ -14,6 +14,9 @@
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
+  width: 254px;
+  box-sizing: border-box;
+  flex-shrink: 0;
 }
 
 /* Top & Left colored borders */
@@ -45,8 +48,18 @@
 
 /* Drag styling */
 .kanban-card.dragging {
-  transform: rotate(2deg);
-  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.15);
+  /* Transform is handled inline to preserve translate while adding rotate */
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.15) !important;
+  width: 254px !important;
+  min-width: 254px !important;
+  max-width: 254px !important;
+  box-sizing: border-box !important;
+  padding: 14px !important;
+  /* Prevent any size changes during drag */
+  flex-shrink: 0 !important;
+  flex-grow: 0 !important;
+  /* Ensure no scaling affects the size */
+  transform-origin: center center;
 }
 
 /* Header */
