@@ -70,7 +70,7 @@ const ReportsCardView = ({ reportsList, cardColor, onViewReport, onDownloadRepor
         </div>
         <div className="reports-card-grid">
           {reportsList.map((report) => (
-            <div key={report.id} className="reports-card" style={{ "--card-color": cardColor }}>
+            <div key={report.id} className="reports-card" style={{ "--card-color": cardColor }} tabIndex="-1">
               <div className="reports-card-header">
                 <div className="reports-card-name">{report.reportName || ""}</div>
                 <div className={`reports-card-status ${getStatusClass(report.status)}`}>

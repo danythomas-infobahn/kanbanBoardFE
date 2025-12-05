@@ -70,7 +70,7 @@ const ReportsAnalytics = ({ reportsList, cardColor }) => {
       </div>
       <div className="reports-analytics-content">
         {/* Pie Chart - Status Distribution */}
-        <div className="reports-analytics-chart-container">
+        <div className="reports-analytics-chart-container" tabIndex="-1">
           <div className="reports-analytics-chart-wrapper">
             <h4 className="reports-analytics-chart-title">Status Distribution</h4>
             <ResponsiveContainer width="100%" height={300}>
@@ -96,7 +96,7 @@ const ReportsAnalytics = ({ reportsList, cardColor }) => {
         </div>
 
         {/* Bar Chart - Reports by Type */}
-        <div className="reports-analytics-chart-container">
+        <div className="reports-analytics-chart-container" tabIndex="-1">
           <div className="reports-analytics-chart-wrapper">
             <h4 className="reports-analytics-chart-title">Reports by Type</h4>
             <ResponsiveContainer width="100%" height={300}>

@@ -2196,6 +2196,56 @@
   overflow: hidden;
 }
 
+/* Remove focus outlines from all interactive elements */
+.reports-analytics-section *,
+.reports-card-view-section *,
+.kpi-content-wrapper *,
+button,
+.reports-card,
+.reports-card-action-btn,
+.kpi-chart-section,
+.reports-analytics-chart-container,
+.reports-analytics-chart-wrapper,
+.kpi-chart-container {
+  outline: none !important;
+  border: none !important;
+}
+
+.reports-card-action-btn:focus,
+.reports-card-action-btn:active,
+.reports-card-action-btn:focus-visible,
+button:focus,
+button:active,
+button:focus-visible,
+.reports-card:focus,
+.reports-card:active,
+.reports-card:focus-visible,
+.kpi-chart-section:focus,
+.kpi-chart-section:active,
+.kpi-chart-section:focus-visible,
+.reports-analytics-chart-container:focus,
+.reports-analytics-chart-container:active,
+.reports-analytics-chart-container:focus-visible {
+  outline: none !important;
+  box-shadow: none !important;
+  border: none !important;
+}
+
+/* Remove outline from SVG and chart elements */
+.recharts-wrapper,
+.recharts-surface,
+svg,
+.recharts-responsive-container {
+  outline: none !important;
+}
+
+.recharts-wrapper:focus,
+.recharts-surface:focus,
+svg:focus {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
 .reports-analytics-header {
   display: flex;
   justify-content: space-between;
@@ -2238,6 +2288,19 @@
   border-radius: 8px;
   padding: 16px;
   border: 1px solid #f0f0f0;
+  outline: none !important;
+  -webkit-tap-highlight-color: transparent;
+  -moz-tap-highlight-color: transparent;
+  tap-highlight-color: transparent;
+}
+
+.reports-analytics-chart-container:focus,
+.reports-analytics-chart-container:active,
+.reports-analytics-chart-container:focus-visible,
+.reports-analytics-chart-container:focus-within {
+  outline: none !important;
+  box-shadow: none !important;
+  border: 1px solid #f0f0f0 !important;
 }
 
 .reports-analytics-chart-wrapper {
@@ -2311,6 +2374,19 @@
   display: flex;
   flex-direction: column;
   gap: 12px;
+  outline: none !important;
+  -webkit-tap-highlight-color: transparent;
+  -moz-tap-highlight-color: transparent;
+  tap-highlight-color: transparent;
+}
+
+.reports-card:focus,
+.reports-card:active,
+.reports-card:focus-visible,
+.reports-card:focus-within {
+  outline: none !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1) !important;
+  border: 1px solid #f0f0f0 !important;
 }
 
 .reports-card:hover {
@@ -2663,6 +2739,186 @@ body .modal-backdrop.show {
   .reports-preview-modal {
     width: 95%;
     max-height: 95vh;
+  }
+}
+
+/* ==========================================================
+   REMOVE FOCUS OUTLINES FROM ALL INTERACTIVE ELEMENTS
+   ========================================================== */
+
+/* Remove focus outlines from buttons and clickable elements */
+button:focus,
+button:active,
+button:focus-visible,
+.reports-card-action-btn:focus,
+.reports-card-action-btn:active,
+.reports-card-action-btn:focus-visible,
+.reports-preview-modal-btn:focus,
+.reports-preview-modal-btn:active,
+.reports-preview-modal-btn:focus-visible,
+.kpi-chart-section:focus,
+.kpi-chart-section:active,
+.kpi-chart-section:focus-visible,
+.reports-analytics-chart-container:focus,
+.reports-analytics-chart-container:active,
+.reports-analytics-chart-container:focus-visible,
+.reports-card:focus,
+.reports-card:active,
+.reports-card:focus-visible,
+.reports-card-view-section *:focus,
+.reports-card-view-section *:active,
+.reports-card-view-section *:focus-visible,
+.kpi-content-wrapper *:focus,
+.kpi-content-wrapper *:active,
+.kpi-content-wrapper *:focus-visible,
+.reports-analytics-section *:focus,
+.reports-analytics-section *:active,
+.reports-analytics-section *:focus-visible,
+div:focus,
+div:active,
+div:focus-visible {
+  outline: none !important;
+  box-shadow: none !important;
+  border: none !important;
+}
+
+/* Remove outline from all elements when clicked */
+*:focus,
+*:active,
+*:focus-visible,
+*:focus-within {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+/* Remove outline from chart elements specifically */
+.recharts-wrapper,
+.recharts-surface,
+.recharts-responsive-container,
+.recharts-legend-wrapper,
+.recharts-tooltip-wrapper,
+svg,
+.reports-analytics-chart-container,
+.kpi-chart-section,
+.reports-card {
+  outline: none !important;
+  -webkit-tap-highlight-color: transparent;
+  -moz-tap-highlight-color: transparent;
+  tap-highlight-color: transparent;
+}
+
+.recharts-wrapper:focus,
+.recharts-surface:focus,
+svg:focus,
+.reports-analytics-chart-container:focus,
+.kpi-chart-section:focus,
+.reports-card:focus {
+  outline: none !important;
+  box-shadow: none !important;
+  border: none !important;
+}
+
+/* ==========================================================
+   KPI CHARTS SECTION
+   ========================================================== */
+
+.kpi-content-wrapper {
+  padding: 0;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  overflow: hidden;
+}
+
+.kpi-content-wrapper *:focus {
+  outline: none !important;
+}
+
+.kpi-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 18px 22px;
+  background: #ffffff;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.kpi-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: #1a1a1a;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.kpi-title-bar {
+  width: 4px;
+  height: 18px;
+  background: var(--card-color, #2A00FF);
+  border-radius: 2px;
+  display: inline-block;
+}
+
+.kpi-charts-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  padding: 20px 22px;
+  background: #ffffff;
+}
+
+.kpi-chart-section {
+  background: #f8f9fc;
+  border-radius: 8px;
+  padding: 16px;
+  border: 1px solid #f0f0f0;
+  outline: none !important;
+  -webkit-tap-highlight-color: transparent;
+  -moz-tap-highlight-color: transparent;
+  tap-highlight-color: transparent;
+}
+
+.kpi-chart-section:focus,
+.kpi-chart-section:active,
+.kpi-chart-section:focus-visible,
+.kpi-chart-section:focus-within {
+  outline: none !important;
+  box-shadow: none !important;
+  border: 1px solid #f0f0f0 !important;
+}
+
+.kpi-chart-container {
+  width: 100%;
+  height: 100%;
+}
+
+.kpi-chart-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: #333;
+  margin: 0 0 16px 0;
+  text-align: center;
+}
+
+/* Responsive styles for KPI charts */
+@media (max-width: 1024px) {
+  .kpi-charts-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .kpi-charts-grid {
+    padding: 16px;
+    gap: 16px;
+  }
+
+  .kpi-chart-section {
+    padding: 12px;
   }
 }
 

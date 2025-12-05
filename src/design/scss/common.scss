@@ -55,6 +55,64 @@ label[for] {
     user-select: none;
 }
 
+/* Remove focus outlines from all elements globally */
+*:focus,
+*:focus-visible,
+*:active,
+*:focus-within {
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+button:focus,
+button:focus-visible,
+button:active,
+a:focus,
+a:focus-visible,
+a:active,
+div:focus,
+div:focus-visible,
+div:active {
+    outline: none !important;
+    box-shadow: none !important;
+    border: none !important;
+}
+
+/* Remove tap highlight on mobile and prevent focus rectangles */
+* {
+    -webkit-tap-highlight-color: transparent !important;
+    -moz-tap-highlight-color: transparent !important;
+    tap-highlight-color: transparent !important;
+}
+
+/* Specifically remove outlines from chart elements */
+.recharts-wrapper,
+.recharts-surface,
+.recharts-responsive-container,
+.recharts-legend-wrapper,
+.recharts-tooltip-wrapper,
+svg,
+.reports-analytics-chart-container,
+.kpi-chart-section,
+.reports-card,
+.kpi-chart-container,
+.reports-analytics-chart-wrapper {
+    outline: none !important;
+    box-shadow: none !important;
+    border: none !important;
+}
+
+.recharts-wrapper:focus,
+.recharts-surface:focus,
+svg:focus,
+.reports-analytics-chart-container:focus,
+.kpi-chart-section:focus,
+.reports-card:focus {
+    outline: none !important;
+    box-shadow: none !important;
+    border: none !important;
+}
+
 /* Not-allowed cursor for disabled elements */
 button:disabled,
 input:disabled,
