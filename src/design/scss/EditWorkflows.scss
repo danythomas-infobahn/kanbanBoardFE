@@ -415,13 +415,14 @@
 
 .workflow-column {
   min-width: 200px;
-  flex: 1;
+  flex: 0 1 auto;
   display: flex;
   flex-direction: column;
   align-items: stretch;
   position: relative;
   padding-bottom: 16px;
   border-radius: 8px;
+  width: auto;
 }
 
 .workflow-column-header {
@@ -450,6 +451,7 @@
   gap: 8px;
   align-items: stretch;
   width: 100%;
+  flex-wrap: nowrap;
 }
 
 .workflow-stage-box {
@@ -458,8 +460,8 @@
   border-radius: 8px;
   padding: 16px;
   min-height: 120px;
-  min-width: 150px;
-  flex: 1;
+  width: 200px;
+  flex: 0 0 auto;
   position: relative;
   overflow: visible;
   display: flex;
