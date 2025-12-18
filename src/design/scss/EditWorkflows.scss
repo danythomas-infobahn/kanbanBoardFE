@@ -423,21 +423,116 @@
   padding-left: 8px;
 }
 
+.workflow-columns-wrapper {
+  position: relative;
+  padding-left: 16px;
+  padding-right: 16px;
+  padding-bottom: 8px;
+
+  @media ($sm-767) {
+    padding-left: 8px;
+    padding-right: 8px;
+  }
+}
+
 .workflow-columns {
   display: flex;
   align-items: stretch;
   gap: 12px;
   overflow-x: auto;
   overflow-y: visible;
-  padding-bottom: 8px;
-  padding-left: 16px;
-  padding-right: 16px;
   position: relative;
+  margin-left: 180px; // Space for Portfolio Lane
 
   @media ($sm-767) {
     gap: 8px;
-    padding-left: 8px;
-    padding-right: 8px;
+    margin-left: 160px;
+  }
+}
+
+.portfolio-lane-column {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 180px;
+  z-index: 2;
+  flex: 0 0 auto;
+
+  @media ($sm-767) {
+    width: 160px;
+  }
+}
+
+.portfolio-lane-header {
+  padding: 12px 16px;
+  background: transparent;
+  border-radius: 8px 8px 0 0;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.portfolio-lane-box {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  padding: 16px;
+  width: 100%;
+  min-height: 120px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.portfolio-lane-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  width: 100%;
+  justify-content: flex-start;
+  padding-top: 8px;
+}
+
+.portfolio-lane-title {
+  font: normal normal 600 14px/1.4 $font-primary;
+  color: $txtColor;
+  text-align: center;
+  margin-bottom: 8px;
+}
+
+.portfolio-lane-icons {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  align-items: center;
+}
+
+.portfolio-lane-icon-btn {
+  width: 32px;
+  height: 32px;
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
+  background: #ffffff;
+  color: #9ca3af;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  padding: 0;
+
+  &:hover {
+    background: #f3f4f6;
+    color: #6b7280;
+    border-color: #d1d5db;
+  }
+
+  svg {
+    width: 16px;
+    height: 16px;
   }
 }
 
@@ -570,6 +665,35 @@
   }
 }
 
+// efb_cells container for limit placeholders
+.efb_cells {
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+}
+
+.efb_cell {
+  position: absolute;
+  pointer-events: auto;
+}
+
+.portfolio-lane-cell {
+  left: 0;
+  width: 180px;
+
+  @media ($sm-767) {
+    width: 160px;
+  }
+}
+
+.workflow-area-cell {
+  // Positioned dynamically via JavaScript
+}
+
 .workflow-stage-placeholder {
   margin-top: 8px;
   padding: 16px;
@@ -583,6 +707,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  width: 100%;
 }
 
 // Add Column Buttons (Hover + Icons)

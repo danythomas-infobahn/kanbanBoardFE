@@ -13,7 +13,6 @@ const BoardFilterPanel = ({ show, onClose }) => {
     <>
       {/* Overlay */}
       <div className="board-filter-overlay" onClick={onClose} />
-
       {/* Panel */}
       <div className="board-filter-panel">
         {/* Header */}
@@ -28,7 +27,6 @@ const BoardFilterPanel = ({ show, onClose }) => {
             <FiX size={20} />
           </button>
         </div>
-
         {/* Filter Input */}
         <div className="board-filter-input-wrapper">
           <input
@@ -46,7 +44,6 @@ const BoardFilterPanel = ({ show, onClose }) => {
             <FiSettings size={18} />
           </button>
         </div>
-
         {/* Quick Filters Section */}
         <div className="board-filter-section">
           <button
@@ -79,7 +76,6 @@ const BoardFilterPanel = ({ show, onClose }) => {
             </div>
           )}
         </div>
-
         {/* Advanced Filtering Section */}
         <div className="board-filter-section">
           <button
