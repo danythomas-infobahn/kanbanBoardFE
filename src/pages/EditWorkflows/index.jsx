@@ -6,9 +6,6 @@ function EditWorkflows() {
     const [boardName, setBoardName] = useState('Team workspace');
     const [description, setDescription] = useState('There is no description');
     const [defaultTemplates, setDefaultTemplates] = useState('Default template configurations: 0');
-    const [cardSizeType, setCardSizeType] = useState('No pattern');
-    const [allowExceeding, setAllowExceeding] = useState('Always allow');
-    const [limitType, setLimitType] = useState('Card count');
     const [customCardId, setCustomCardId] = useState('Repeating value');
     const [showCreateWorkflowModal, setShowCreateWorkflowModal] = useState(false);
     const [hoveredColumn, setHoveredColumn] = useState(null); // Format: 'workflowId-swimlaneId-stageId'
@@ -483,39 +480,6 @@ function EditWorkflows() {
                                 value={defaultTemplates}
                                 onChange={(e) => setDefaultTemplates(e.target.value)}
                             />
-                        </div>
-
-                        <div className="workflows-config-field">
-                            <label className="workflows-config-label">Card size type</label>
-                            <select
-                                className="workflows-config-select"
-                                value={cardSizeType}
-                                onChange={(e) => setCardSizeType(e.target.value)}
-                            >
-                                <option>No pattern</option>
-                            </select>
-                        </div>
-
-                        <div className="workflows-config-field">
-                            <label className="workflows-config-label">Allow exceeding the limits</label>
-                            <select
-                                className="workflows-config-select"
-                                value={allowExceeding}
-                                onChange={(e) => setAllowExceeding(e.target.value)}
-                            >
-                                <option>Always allow</option>
-                            </select>
-                        </div>
-
-                        <div className="workflows-config-field">
-                            <label className="workflows-config-label">Limit type</label>
-                            <select
-                                className="workflows-config-select"
-                                value={limitType}
-                                onChange={(e) => setLimitType(e.target.value)}
-                            >
-                                <option>Card count</option>
-                            </select>
                         </div>
 
                         <div className="workflows-config-field">
