@@ -6,7 +6,7 @@
 const workflowsConfig = [
   {
     id: "workflow-1",
-    title: "Cards workflow",
+    // title: "Cards workflow",
     columnColors: {
       "col-1": "rgb(226 16 108)",
       "col-2": "rgb(121 21 188)",
@@ -34,7 +34,7 @@ const workflowsConfig = [
   },
   {
     id: "workflow-2",
-    title: "Cards workflow 2",
+    // title: "Cards workflow 2",
     columnColors: {
       "col-1": "rgb(226 16 108)",
       "col-2": "rgb(121 21 188)",

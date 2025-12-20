@@ -420,7 +420,7 @@ function EditWorkflows() {
                                                 );
                                             })}
                                         </div>
-                                        <div className="workflow-add-placeholder-container">
+                                        {/* <div className="workflow-add-placeholder-container">
                                             <button
                                                 className="workflow-add-placeholder-btn"
                                                 type="button"
@@ -431,7 +431,7 @@ function EditWorkflows() {
                                                     <path d="M10 4V16M4 10H16" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
                                                 </svg>
                                             </button>
-                                        </div>
+                                        </div> */}
                                     </div>
                                 );
                             })}
