@@ -7,17 +7,6 @@
   flex-direction: column;
   font-family: "Inter", sans-serif;
   padding: 0;
-  transition: width 0.3s ease, flex-grow 0.3s ease;
-}
-
-.column-expanded {
-  width: 1100px !important;
-  flex-grow: 1;
-}
-
-.column-shrunk {
-  width: 100px !important;
-  flex-shrink: 1;
 }
 
 
@@ -31,13 +20,8 @@
   height: 40px;
   margin-bottom: 10px;
   overflow: hidden;
-  cursor: pointer;
-  transition: background-color 0.2s ease;
 }
 
-.column-header:hover {
-  background: #e0e5ff;
-}
 
 
 /* Top Color Bar */
@@ -118,12 +102,6 @@
   /* Cards align to top, don't stretch to match row height */
 }
 
-/* Single column layout for shrunk columns */
-.column-shrunk .card-list {
-  grid-template-columns: 1fr;
-  gap: 6px;
-  padding: 8px;
-}
 
 /* When a card is dragged over */
 .card-list.drag-over {

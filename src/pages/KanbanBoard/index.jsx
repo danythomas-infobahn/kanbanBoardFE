@@ -11,23 +11,6 @@ export default function KanbanBoard() {
   const [selectedCard, setSelectedCard] = useState(null);
   const [isAddMode, setIsAddMode] = useState(false);
   const [showWorkspaces, setShowWorkspaces] = useState(false);
-  // Track expanded state for each workflow
-  const [expandedWorkflows, setExpandedWorkflows] = useState(() => {
-    const state = {};
-    initialData.forEach(workflow => {
-      state[workflow.id] = true; // All workflows expanded by default
-    });
-    return state;
-  });
-
-  // Track expanded column for each workflow (columnId or null)
-  const [expandedColumns, setExpandedColumns] = useState(() => {
-    const state = {};
-    initialData.forEach(workflow => {
-      state[workflow.id] = null; // No column expanded by default
-    });
-    return state;
-  });
 
   const handleSelectCard = useCallback(card => {
     setSelectedCard(card);
@@ -105,7 +88,7 @@ export default function KanbanBoard() {
     let targetColumn = null;
     let targetWorkflowIndex = -1;
     let targetColumnKey = null;
-    
+
     for (let i = 0; i < workflows.length; i++) {
       const workflow = workflows[i];
       const foundColumn = Object.values(workflow.columns).find(col => col.id === targetColumnId);
@@ -137,7 +120,7 @@ export default function KanbanBoard() {
 
     setWorkflows(prevWorkflows => {
       const updated = [...prevWorkflows];
-      
+
       // Update source workflow
       if (sourceWorkflowIndex === targetWorkflowIndex) {
         // Same workflow - update both columns
@@ -201,7 +184,7 @@ export default function KanbanBoard() {
 
         // Find the column key to update
         const columnKey = Object.keys(workflow.columns).find(key => workflow.columns[key].id === newColumn.id);
-        
+
         setWorkflows(prevWorkflows =>
           prevWorkflows.map(w =>
             w.id === workflowId
@@ -234,47 +217,21 @@ export default function KanbanBoard() {
     };
   }, [workflows]);
 
-  // Toggle workflow expansion
-  const toggleWorkflow = useCallback((workflowId) => {
-    setExpandedWorkflows(prev => ({
-      ...prev,
-      [workflowId]: !prev[workflowId]
-    }));
-  }, []);
-
-  // Handle column header click to expand/shrink
-  const handleColumnHeaderClick = useCallback((workflowId, columnId) => {
-    setExpandedColumns(prev => {
-      const currentExpanded = prev[workflowId];
-      // If clicking the same column, collapse it. Otherwise, expand the clicked column.
-      return {
-        ...prev,
-        [workflowId]: currentExpanded === columnId ? null : columnId
-      };
-    });
-  }, []);
-
   // Render columns for a workflow
   const renderWorkflowColumns = useCallback((workflow) => {
-    const expandedColumnId = expandedColumns[workflow.id];
     return workflow.columnOrder.map(colId => {
       const column = workflow.columns[colId];
       const cards = column.cardIds.map(id => workflow.cards[id]);
-      const isExpanded = expandedColumnId === column.id;
-      const isShrunk = expandedColumnId !== null && expandedColumnId !== column.id;
       return (
         <Column
           key={column.id}
           column={column}
           cards={cards}
           setSelectedCard={handleSelectCard}
-          isExpanded={isExpanded}
-          isShrunk={isShrunk}
-          onHeaderClick={() => handleColumnHeaderClick(workflow.id, column.id)}
         />
       );
     });
-  }, [handleSelectCard, expandedColumns, handleColumnHeaderClick]);
+  }, [handleSelectCard]);
 
   // Show Workspaces view when Workspaces icon is clicked
   if (showWorkspaces) {
@@ -290,7 +247,7 @@ export default function KanbanBoard() {
   }, [selectedCard, workflows]);
 
   const selectedCardWorkflow = getSelectedCardWorkflow();
-  
+
   // For add mode, use the first workflow's columns if no workflow is found
   const columnsForCardForm = useMemo(() => {
     if (isAddMode && !selectedCardWorkflow && workflows.length > 0) {
@@ -302,26 +259,12 @@ export default function KanbanBoard() {
   return (
     <>
       {workflows.map((workflow) => (
-        <div key={workflow.id} className="kanban-accordion">
-          <div
-            className="kanban-accordion-header"
-            onClick={() => toggleWorkflow(workflow.id)}
-          >
-            <h2 className="kanban-accordion-title">{workflow.title}</h2>
-            <span className={`kanban-accordion-icon ${expandedWorkflows[workflow.id] ? 'expanded' : ''}`}>
-              ▼
-            </span>
-          </div>
-
-          {expandedWorkflows[workflow.id] && (
-            <div className="kanban-container">
-              <DragDropContext onDragEnd={createDragEndHandler(workflow.id)}>
-                <div className="kanban-board">
-                  {renderWorkflowColumns(workflow)}
-                </div>
-              </DragDropContext>
+        <div key={workflow.id} className="kanban-container">
+          <DragDropContext onDragEnd={createDragEndHandler(workflow.id)}>
+            <div className="kanban-board">
+              {renderWorkflowColumns(workflow)}
             </div>
-          )}
+          </DragDropContext>
         </div>
       ))}
 
