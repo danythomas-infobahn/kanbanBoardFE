@@ -11,23 +11,6 @@ export default function KanbanBoard() {
   const [selectedCard, setSelectedCard] = useState(null);
   const [isAddMode, setIsAddMode] = useState(false);
   const [showWorkspaces, setShowWorkspaces] = useState(false);
-  // Track expanded state for each workflow
-  const [expandedWorkflows, setExpandedWorkflows] = useState(() => {
-    const state = {};
-    initialData.forEach(workflow => {
-      state[workflow.id] = true; // All workflows expanded by default
-    });
-    return state;
-  });
-
-  // Track expanded column for each workflow (columnId or null)
-  const [expandedColumns, setExpandedColumns] = useState(() => {
-    const state = {};
-    initialData.forEach(workflow => {
-      state[workflow.id] = null; // No column expanded by default
-    });
-    return state;
-  });
 
   const handleSelectCard = useCallback(card => {
     setSelectedCard(card);
@@ -234,52 +217,21 @@ export default function KanbanBoard() {
     };
   }, [workflows]);
 
-  // Toggle workflow expansion
-  const toggleWorkflow = useCallback((workflowId) => {
-    setExpandedWorkflows(prev => ({
-      ...prev,
-      [workflowId]: !prev[workflowId]
-    }));
-  }, []);
-
-  // Handle column header click to expand/shrink
-  const handleColumnHeaderClick = useCallback((workflowId, columnId) => {
-    setExpandedColumns(prev => {
-      const currentExpanded = prev[workflowId];
-      // If clicking the same column, collapse it. Otherwise, expand the clicked column.
-      return {
-        ...prev,
-        [workflowId]: currentExpanded === columnId ? null : columnId
-      };
-    });
-  }, []);
-
   // Render columns for a workflow
   const renderWorkflowColumns = useCallback((workflow) => {
-    const expandedColumnId = expandedColumns[workflow.id];
     return workflow.columnOrder.map(colId => {
       const column = workflow.columns[colId];
       const cards = column.cardIds.map(id => workflow.cards[id]);
-      const isExpanded = expandedColumnId === column.id;
-      const isShrunk = expandedColumnId !== null && expandedColumnId !== column.id;
       return (
         <Column
           key={column.id}
           column={column}
           cards={cards}
           setSelectedCard={handleSelectCard}
-          isExpanded={isExpanded}
-          isShrunk={isShrunk}
-          onHeaderClick={() => handleColumnHeaderClick(workflow.id, column.id)}
         />
       );
     });
-  }, [handleSelectCard, expandedColumns, handleColumnHeaderClick]);
-
-  // Show Workspaces view when Workspaces icon is clicked
-  if (showWorkspaces) {
-    return <Workspaces />;
-  }
+  }, [handleSelectCard]);
 
   // Find the workflow that contains the selected card
   const getSelectedCardWorkflow = useCallback(() => {
@@ -299,31 +251,26 @@ export default function KanbanBoard() {
     return selectedCardWorkflow?.columns;
   }, [isAddMode, selectedCardWorkflow, workflows]);
 
+  // Show Workspaces view when Workspaces icon is clicked
+  if (showWorkspaces) {
+    return <Workspaces />;
+  }
+
+  // Combine all workflows into a single kanban board
+  // Use the first workflow for drag and drop context
+  const primaryWorkflow = workflows.length > 0 ? workflows[0] : null;
+
   return (
     <>
-      {workflows.map((workflow) => (
-        <div key={workflow.id} className="kanban-accordion">
-          <div
-            className="kanban-accordion-header"
-            onClick={() => toggleWorkflow(workflow.id)}
-          >
-            <h2 className="kanban-accordion-title">{workflow.title}</h2>
-            <span className={`kanban-accordion-icon ${expandedWorkflows[workflow.id] ? 'expanded' : ''}`}>
-              ▼
-            </span>
-          </div>
-
-          {expandedWorkflows[workflow.id] && (
-            <div className="kanban-container">
-              <DragDropContext onDragEnd={createDragEndHandler(workflow.id)}>
-                <div className="kanban-board">
-                  {renderWorkflowColumns(workflow)}
-                </div>
-              </DragDropContext>
+      <div className="kanban-container">
+        {primaryWorkflow && (
+          <DragDropContext onDragEnd={createDragEndHandler(primaryWorkflow.id)}>
+            <div className="kanban-board">
+              {workflows.map((workflow) => renderWorkflowColumns(workflow))}
             </div>
-          )}
-        </div>
-      ))}
+          </DragDropContext>
+        )}
+      </div>
 
       {selectedCard && columnsForCardForm && (
         <CardForm
